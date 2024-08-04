@@ -1,24 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import './biblio.scss';
+import { BookProps } from './components/Book/Book';
+import { Criteries } from './components/Criteries/Criteries';
+import Header from './components/Header/Header';
+import { SelectProps } from './components/Select/Select';
+import Catalog from './pages/catalog';
 
-function App() {
+export function App() {
+
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [books, setBooks] = useState<BookProps[]>([]);
+  const [selectItems, setSetSelectItems] = useState<SelectProps[]>([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+<div>
+      <Header />
+      <Criteries/>
+      <Routes>
+        <Route path='/catalog' element={
+          <Catalog />}>
+        </Route>
+      </Routes>
     </div>
   );
 }
