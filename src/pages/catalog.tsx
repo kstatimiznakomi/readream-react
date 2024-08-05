@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Book, { BookProps } from '../components/Book/Book';
 import { LoadingComp } from '../components/loading/loading';
-import { Pager } from '../pager/Pager';
+import { Pager } from '../components/pager/Pager';
 
 export interface CatalogProps {
     

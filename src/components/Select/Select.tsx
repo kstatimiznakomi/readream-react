@@ -1,37 +1,42 @@
+import { CriteriaTypes } from '../../enums/enum';
 import { Option } from '../Option/Option';
 
 export interface SelectProps {
     key: string
-    selectName: string
+    selectName: CriteriaTypes
     options: any[]
 }
 
 export const Select: React.FC<SelectProps> = ({ options, selectName }) => {
 
-    const getNameForOptions = () => {
+    const getCriteriesForOptions = () => {
         switch (selectName) {
-            case "author":
+            case CriteriaTypes.Authors:
                 return (
                     options.map((option) => (
-                        <Option key={option.id} id={option.id} name={option.authorName + " " + option.authorName}/>
+                        <Option key={option.id} id={option.id} name={option.authorLastName + " " + option.authorName}/>
                     ))
                 )
-            case "genres":
+            case CriteriaTypes.Genres:
                 return (
                     options.map((option) => (
                         <Option key={option.id} id={option.id} name={option.genreName}/>
+                    ))
+                )
+            case CriteriaTypes.Publishers:
+                return (
+                    options.map((option) => (
+                        <Option key={option.id} id={option.id} name={option.publisherName}/>
                     ))
                 )
         }
     }
 
     return (
-        <div>
-            <select name={selectName} id={selectName}>
+            <select name={selectName.toString()} id={selectName.toString()}>
                 {
-                    getNameForOptions()
+                    getCriteriesForOptions()
                 }
             </select>
-        </div>
     )
 }
