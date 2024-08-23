@@ -1,11 +1,16 @@
 @import './components/Book/book.module.scss';
 @import './components/Header/header.module.scss';
+@import './components/Input//Input.index.scss';
 
 *{
     padding: 0; margin: 0;
     outline: none;
     border-width: inherit;
     font-family: Inter;
+}
+
+.text-center {
+    text-align: center;
 }
 
 .reg-bg{
@@ -163,13 +168,7 @@
     grid-auto-columns: min-content;
 }
 
-.book-inputs{
-    padding: 13px 31px;
-    border-radius: 15px;
-    border-width: inherit;
-    margin: 10px;
-    width: 583px;
-}
+
 
 .user{
     padding: 13px 31px;
@@ -232,6 +231,7 @@ body
     background-color: rgb(255, 255, 255);
     border-radius: 15px;
     border-width: inherit;
+    position: absolute;
 }
 
 li{
@@ -339,11 +339,6 @@ li{
     height: 40px;
 }
 
-input{
-    outline: none;
-    border-radius: 14px;
-    border-width: inherit;
-}
 
 select{
     outline: none;
@@ -351,13 +346,7 @@ select{
     border-width: inherit;
 }
 
-.search-input{
-    border-radius: 14px;
-    width: 100%;
-    height: 40px;
-    padding: 5px 16px;;
-    border-width: inherit;
-}
+
 
 .reserved-bks{
     font-family: Inter;
@@ -383,21 +372,6 @@ select{
     padding-left: 0;
     list-style: none;
     flex-direction: row;
-}
-
-.res-book-bg{
-    height: 152px;
-    width: 1000px;
-    display: flex;
-    flex-direction: row;
-    border-radius: 14px;
-    background: linear-gradient(180deg, #FFE68B, rgb(255 237 151) 100%);
-    padding: 11px 24px;
-    margin: 10px auto;
-}
-
-.search-input:checked{
-    border-color: #FFE68B;
 }
 
 .page-digits-bg-link{
@@ -438,37 +412,12 @@ ul{
     justify-content: center;
 }
 
-.book-bg {
-    height: auto;
-    flex-shrink: 0;
-    border-radius: 11px;
-    background: transparent;
-    margin: auto auto;
-    list-style: none;
-    width: fit-content !important;
-}
-
-.book-img-prof{
-    border-radius: 14px;
-}
-
-.book-img{
-    border-radius: 14px;
-    height: 300px;
-}
-
 a{
     text-decoration: none;
 }
 
 a:hover{
     text-decoration: underline;
-}
-
-.book-nm{
-    height: 157px;
-    line-height: 25px;
-    font-size: x-large;
 }
 
 .book {
@@ -481,41 +430,6 @@ a:hover{
 
 .user-data{
     background-color: #ffb016;
-}
-
-.book li {
-    border-radius: 14px;
-    background: #ebfbff;
-    align-items: center;
-}
-
-.name-book a{
-    text-decoration: none;
-    font-family: Inter;
-    font-size: 36px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    color: #000;
-}
-
-.name-book a:hover{
-    text-decoration: underline;
-    color: #000000;
-    outline: none;
-    border: 0;
-
-}
-
-.description-book {
-    padding-right: 20px;
-
-    font-family: Inter;
-    font-size: 20px;
-    font-style: normal;
-    line-height: normal;
-    font-weight: 400;
-    color: #000;
 }
 
 .btn-book a{
@@ -579,12 +493,7 @@ select{
     border-width: 0;
 }
 
-.input-date{
-    padding: 5px;
-    border-radius: 14px;
-    border-width: inherit;
-    height: 45px;
-}
+
 
 nav{
     vertical-align: middle;

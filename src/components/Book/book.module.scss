@@ -1,6 +1,9 @@
 .book-nm{
     height: 157px;
+    line-height: 25px;
+    font-size: x-large;
 }
+
 
 .book:hover{
     transform: translateY(-5px);
@@ -22,11 +25,11 @@
 
 
 .book {
-    display: flex;
     margin: 0 auto;
     padding: 18px;
     background-color: teal;
     border-radius: 11px;
+    min-width: max-content;
 }
 
 
@@ -35,9 +38,9 @@
     flex-shrink: 0;
     border-radius: 11px;
     background: transparent;
-    margin: 14px auto;
+    margin: auto auto;
     list-style: none;
-    width: fit-content;
+    width: fit-content !important;
 }
 
 .book-img-prof{
@@ -87,7 +90,6 @@
 .name-book a{
     text-decoration: none;
     font-family: Inter;
-    font-size: 36px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -104,7 +106,6 @@
 
 .description-book {
     padding-right: 20px;
-
     font-family: Inter;
     font-size: 20px;
     font-style: normal;

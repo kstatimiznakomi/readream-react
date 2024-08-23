@@ -1,0 +1,32 @@
+.book-inputs{
+    padding: 13px 31px;
+    border-radius: 15px;
+    border-width: inherit;
+    margin: 10px;
+    width: 583px;
+}
+
+input{
+    outline: none;
+    border-radius: 14px;
+    border-width: inherit;
+}
+
+.search-input{
+    border-radius: 14px;
+    width: 100%;
+    height: 40px;
+    padding: 5px 55px;
+    border-width: inherit;
+}
+
+.search-input:checked{
+    border-color: #FFE68B;
+}
+
+.input-date{
+    padding: 5px;
+    border-radius: 14px;
+    border-width: inherit;
+    height: 45px;
+}

@@ -1,47 +1,45 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { observer } from 'mobx-react-lite';
+import React, { useContext, useEffect, useState } from 'react';
 import Book, { BookProps } from '../components/Book/Book';
 import { LoadingComp } from '../components/loading/loading';
-import { Pager } from '../components/pager/Pager';
+import { isLoadingStore, pageStore } from '../stores';
 
 export interface CatalogProps {
-    
+    page: number
+    setTotalPages: (value: number) => void
 }
 
-const Catalog: React.FC<CatalogProps> = () => {
-    const [page, setPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
-    const [isLoading, setIsLoading] = useState(false);
+export const Catalog: React.FC<CatalogProps> = observer(({ page, setTotalPages }) => {
+    const isLoadingStoree = useContext(isLoadingStore)
     const [books, setBooks] = useState<BookProps[]>([]);
+    const pageStoree = useContext(pageStore)
   
     async function getBooks() {
-        setIsLoading(true)
+        isLoadingStoree.setIsLoading(true)
         axios.get<BookProps[]>('http://localhost:8080/catalog/api/' + page)
         .then((res) => {
         // @ts-ignore-start
         setBooks(res.data.content)
         // @ts-ignore-start
         setTotalPages(res.data.totalPages)
-        setIsLoading(false)
+        isLoadingStoree.setIsLoading(false)
     })}
 
     useEffect(() => {
         getBooks()
-    }, [])
+    }, [pageStoree.page])
 
     return (
-        isLoading ? <LoadingComp/> : 
+        isLoadingStoree.isLoading ? <LoadingComp/> : 
         <section className="container">
-            <div id="content" className="row">
+            <div id="content" className="row gap-3">
             {
                 books.map((book) => (
                     <Book key={book.id} id={book.id} bookName={book.bookName} img={book.img} count={book.count} />
                 ))
             }
             </div>
-            <Pager currentPage={page} pageMin={1} pageMax={totalPages} />
         </section>
     )
-}
-
-export default Catalog
+})

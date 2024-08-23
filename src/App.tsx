@@ -1,21 +1,51 @@
+import { observer } from 'mobx-react-lite';
+import { useContext, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './biblio.scss';
 import { Criteries } from './components/Criteries/Criteries';
 import Header from './components/Header/Header';
-import Catalog from './pages/catalog';
+import { Pager } from './components/pager/Pager';
+import { Catalog } from './pages/catalog';
+import { Main } from './pages/main';
+import { isLoadingStore, pageStore } from './stores';
 
-export function App() {
+
+export const App = observer(() => {
+
+  const pageStoree = useContext(pageStore)
+  const isLoadingStoree = useContext(isLoadingStore)
+  
+  const [totalPages, setTotalPages] = useState(1);
+
+  const setPageApp = () => {
+    pageStoree.setPage(parseInt(document.URL.substring(document.URL.lastIndexOf('/') + 1)))
+  }
+  useEffect(() => {
+    setPageApp()
+  }, [pageStoree.page])
+
+  const setTotalPgs = (totalPages: number) => {
+    totalPages = totalPages
+  }
+  
   return (
 <div>
       <Header />
-      <Criteries/>
       <Routes>
-        <Route path='/catalog' element={
-          <Catalog />}>
-        </Route>
+      <Route path='/' element={
+          <Main/>
+        }/>
+      <Route path={'/catalog/' + pageStoree.page} element={
+          <>
+            <Criteries/>
+            <Catalog setTotalPages={setTotalPages} page={pageStoree.page} />
+            <Pager currentPage={pageStoree.page} pageMin={1} pageMax={totalPages} />
+          </>
+      }/>
+        
       </Routes>
     </div>
   );
-}
+})
 
 export default App;

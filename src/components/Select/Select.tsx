@@ -3,11 +3,13 @@ import { Option } from '../Option/Option';
 
 export interface SelectProps {
     key: string
+    id: string
     selectName: CriteriaTypes
     options: any[]
+    className?: string
 }
 
-export const Select: React.FC<SelectProps> = ({ options, selectName }) => {
+export const Select: React.FC<SelectProps> = ({ options, selectName, id, className }) => {
 
     const getCriteriesForOptions = () => {
         switch (selectName) {
@@ -33,10 +35,8 @@ export const Select: React.FC<SelectProps> = ({ options, selectName }) => {
     }
 
     return (
-            <select name={selectName.toString()} id={selectName.toString()}>
-                {
-                    getCriteriesForOptions()
-                }
+            <select className={className} name={selectName.toString()} id={id}>
+                { getCriteriesForOptions() }
             </select>
     )
 }

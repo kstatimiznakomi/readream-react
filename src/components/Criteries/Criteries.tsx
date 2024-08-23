@@ -4,6 +4,7 @@ import { CriteriaTypes } from "../../enums/enum"
 import { BookProps } from "../Book/Book"
 import { Input } from "../Input/Input"
 import { Select } from "../Select/Select"
+import { SearchBtn } from "../button/SearchBtn"
 
 export interface AuthorProps {
     authorLastName: string
@@ -45,7 +46,6 @@ export const Criteries: React.FC = () => {
         .then((res) => {
             setPublishers(res.data)
         })
-        
     }
 
     useEffect(() => {
@@ -54,16 +54,17 @@ export const Criteries: React.FC = () => {
 
     return (
         <section className="container d-flex justify-content-between">
-            <div className="criteria">
-                <div className="w-100 d-flex flex-column combo container">
+            <div className="criteria w-100 container">
+                <div className="w-100 combo">
                     <div className="d-flex justify-content-between">
-                        <Select key={"author"} selectName={CriteriaTypes.Authors} options={authors}/>
-                        <Select key={"genres"} selectName={CriteriaTypes.Genres} options={genres}/>
-                        <Select key={"publishers"} selectName={CriteriaTypes.Publishers} options={publishers}/>
-                        <Input placeholder="Введите дату выпуска" />
+                        <Select key={"author"} id={CriteriaTypes.Authors.toString()} selectName={CriteriaTypes.Authors} options={authors}/>
+                        <Select key={"genres"} id={CriteriaTypes.Genres.toString()} selectName={CriteriaTypes.Genres} options={genres}/>
+                        <Select key={"publishers"} id={CriteriaTypes.Publishers.toString()} selectName={CriteriaTypes.Publishers} options={publishers}/>
+                        <Input className={"input-date"} placeholder="Введите дату выпуска" />
                     </div>
                     <div className="search mt-3 d-flex w-100 justify-content-between align-items-center">
                         <Input className="search-input" placeholder="Введите название книги" />
+                        <SearchBtn></SearchBtn>
                     </div>
                 </div>
                 

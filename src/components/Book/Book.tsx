@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './book.module.scss';
 
 export interface BookProps {
@@ -16,20 +17,19 @@ export const Book: React.FC<BookProps> = ({
     count
 }) => {
     return (
-    <div className="book-bg mt-2 col-3 transition-all">
-        <ul className="book transition-all ml-0 mr-0">
-            <li className="mr-0">
+        <ul role='button' className="book book-bg mt-2 col-3 transition-all">
+            <li>
                 <div className="name-book">
                     <img className="book-img mt-2" alt={bookName} src={img}/>
-                    <div className="w-100 mt-2 overflow-hidden book-nm">
-                        {/* <Link to={id.toString()}>{bookName}</Link> */}
-                        <span className="book-title">{bookName}</span>
+                    <div className="w-100 mt-2 d-flex justify-content-center overflow-hidden book-nm">
+                        <Link className="book-title text-center" to={id.toString()}>
+                            <span>{bookName}</span>
+                        </Link>
                     </div>
                     <span>Количество: {count}</span>
                 </div>
             </li>
         </ul>
-    </div>
     )
 }
 

@@ -6,6 +6,7 @@ interface InputProps {
     className?: string
     onInput?: void
     placeholder?: string
+    
 }
 
 export const Input: React.FC<InputProps> = ({ value, type, name, id, className, onInput, placeholder }) => {
