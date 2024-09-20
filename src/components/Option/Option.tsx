@@ -1,11 +1,9 @@
 export interface OptionProps {
     key: number
     id: number
-    name: string
+    text: string
 }
 
-export const Option: React.FC<OptionProps> = ({ name, id }) => {
-    return (
-            <option value={id}>{name}</option>
-    )
+export const Option: React.FC<OptionProps> = ({text, id}) => {
+    return (<option value={id}>{text}</option>)
 }

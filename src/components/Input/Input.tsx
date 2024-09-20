@@ -6,11 +6,12 @@ interface InputProps {
     className?: string
     onInput?: void
     placeholder?: string
-    
+    onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined
 }
 
-export const Input: React.FC<InputProps> = ({ value, type, name, id, className, onInput, placeholder }) => {
+export const Input: React.FC<InputProps> = ({onChange, value, type, name, id, className, onInput, placeholder}) => {
     return (
-        <input className={className} type={type} id={id} name={name} value={value} placeholder={placeholder} />
+        <input onChange={onChange} className={className} type={type} id={id} name={name} value={value}
+               placeholder={placeholder}/>
     )
 }

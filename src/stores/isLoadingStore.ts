@@ -4,7 +4,7 @@ configure({enforceActions: 'always'})
 
 export class IsLoadingStore {
     @observable isLoading: boolean = false
-    constructor(isLoading: boolean){
+    constructor(){
         makeAutoObservable(this)
     }
 
