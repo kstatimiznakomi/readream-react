@@ -1,7 +1,8 @@
-@import './components/Book/book.module.scss';
+@import 'components/Book/book.module';
 @import './components/Header/header.module.scss';
 @import './components/Input//Input.index.scss';
 @import './pages/about';
+@import './pages/login.module';
 
 * {
   padding: 0;
@@ -13,16 +14,6 @@
 
 .text-center {
   text-align: center;
-}
-
-.reg-bg {
-  width: 811px;
-  height: 805px;
-  background-color: #FFE68B;
-  display: flex;
-  justify-content: center;
-  margin: 15px auto;
-  border-radius: 14px;
 }
 
 .prof-grad-bg {
@@ -37,22 +28,21 @@
 
 .info {
   margin-left: 195px;
-  height: 373px;
-  width: 820px;
+  width: 100%;
   display: flex;
-  flex-direction: row;
+  margin-right: 44px;
 }
 
 .info-details {
-  width: inherit;
+  width: 100%;
   margin-left: 25px;
   background: linear-gradient(180deg, #FFE68B, rgb(255 237 151) 100%);
-  border-radius: 14px
+  border-radius: 14px;
+  padding: 30px 30px;
 }
 
 .info-details-hr {
   margin-top: 13px;
-  opacity: 100%;
 }
 
 .user-dtls {
@@ -168,30 +158,13 @@
 }
 
 .grad-bg {
-  width: 767px;
-  height: 755px;
+  width: 100%;
   background: linear-gradient(180deg, #FFE68B, rgba(255, 210, 95, 1) 100%);
-  margin-top: 29px;
   border-radius: 14px;
   display: inline-grid;
   justify-content: center;
   grid-auto-columns: min-content;
-}
-
-
-.user {
-  padding: 13px 31px;
-  border-radius: 15px;
-  border-width: inherit;
-  margin: 10px 3px;
-  width: 583px;
-}
-
-.welcome {
-  height: 25px;
-  text-align: -webkit-center;
-  font-family: Inter;
-  font-size: 30px;
+  padding: 15px 15px;
 }
 
 .reg-title {

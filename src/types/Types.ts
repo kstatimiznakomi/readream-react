@@ -1,11 +1,12 @@
 import {BookProps} from "../components/Book/Book";
 
 export interface SearchTypes {
-    bookName?: string
-    authorId?: number
-    genreId?: number
-    publisherId?: number
-    date?: number
+    p?: string
+    t?: string
+    aid?: string
+    gen?: string
+    publisherId?: string
+    d?: string
 }
 
 export interface AuthorProps {
@@ -27,4 +28,12 @@ export interface PublisherProps {
     genreName: string
     books: BookProps[]
     id: number
+}
+
+export interface UserProps {
+    username: string,
+    email: string,
+    name: string,
+    lastname: string,
+    surname: string,
 }

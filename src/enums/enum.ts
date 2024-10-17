@@ -1,7 +1,8 @@
 export const enum CriteriaTypes {
-    Authors = 'authorId',
-    Genres = 'genreId',
+    Authors = 'aid',
+    Genres = 'gen',
     Publishers = 'publisherId',
-    Bookname = 'searchText',
-    Date = 'date',
+    Bookname = 't',
+    Date = 'd',
+    Page = 'p',
 }

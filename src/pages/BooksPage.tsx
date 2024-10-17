@@ -1,44 +1,56 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import {BookProps} from "../components/Book/Book";
 import axios from "axios";
-import {isLoadingStore, pageStore} from "../stores";
+import {isLoadingStore, pageStore, searchCriteria} from "../stores";
 import {Books} from "./books";
-import {apiSearchUrl, searchParams} from "../constants/constants";
+import {apiSearchUrl, backendPort, expressBaseApi, page} from "../constants/constants";
 import {LoadingComp} from "../components/loading/loading";
+import {observer} from "mobx-react-lite";
 
 interface BooksPageProps {
     content: string
 }
 
-export const BooksPage: React.FC<BooksPageProps> = ({content}) => {
+export const BooksPage: React.FC<BooksPageProps> = observer(({content}) => {
 
+    const criteriaStore = useContext(searchCriteria)
     const [books, setBooks] = useState<BookProps[]>([]);
+    const [errMsg, setErrMas] = useState('');
     const isLoadingStoree = useContext(isLoadingStore)
     const pageStoree = useContext(pageStore)
+    const spanRef = useRef(null)
 
-    async function getBooksBySearch() {
+    async function getMainCatalog() {
         isLoadingStoree.setIsLoading(true)
-        pageStoree.setPage(1)
-        axios.get<BookProps[]>(apiSearchUrl + searchParams)
+        pageStoree.setPage(Number(page))
+        await axios.get<BookProps[]>('http://localhost:' + backendPort + expressBaseApi + '/catalog/' + pageStoree.page)
             .then((res) => {
-                // @ts-ignore-start
-                setBooks(res.data.content)
+                setBooks(res.data)
                 // @ts-ignore-start
                 pageStoree.setTotalPages(res.data.totalPages)
                 isLoadingStoree.setIsLoading(false)
             })
     }
 
-    async function getMainCatalog() {
+    const getBooksBySearch = async () => {
         isLoadingStoree.setIsLoading(true)
         pageStoree.setPage(1)
-        axios.get<BookProps[]>('http://localhost:8080/catalog/api/' + pageStoree.page)
+        criteriaStore.url = document.URL
+        let localUrl = decodeURIComponent(decodeURIComponent(apiSearchUrl + criteriaStore.url.slice(criteriaStore.url.indexOf('?'), criteriaStore.url.length)))
+        await axios.get<BookProps[]>(localUrl)
             .then((res) => {
                 // @ts-ignore-start
-                setBooks(res.data.content)
-                // @ts-ignore-start
-                pageStoree.setTotalPages(res.data.totalPages)
-                isLoadingStoree.setIsLoading(false)
+                if (res.data.statusCode === 404) {
+                    isLoadingStoree.setIsLoading(false)
+                    setBooks([])
+                    // @ts-ignore-start
+                    setErrMas(res.data.error)
+                } else {
+                    setBooks(res.data)
+                    // @ts-ignore-start
+                    pageStoree.setTotalPages(res.data.totalPages)
+                    isLoadingStoree.setIsLoading(false)
+                }
             })
     }
 
@@ -51,14 +63,21 @@ export const BooksPage: React.FC<BooksPageProps> = ({content}) => {
                 getBooksBySearch()
                 break
         }
-
-    }, [pageStoree.page, content])
+    }, [pageStoree.page, content, criteriaStore.url])
 
     return (
         <>
             {
-                isLoadingStoree.isLoading ? <LoadingComp/> : <Books books={books}/>
+                !books.length ?
+                    <>
+                        <div className={'d-flex justify-content-center mt-3'}>
+                            <span className={'not-found-msg'}>{errMsg}</span>
+                        </div>
+                    </>
+                    : isLoadingStoree.isLoading ?
+                        <LoadingComp/> : <Books books={books}/>
             }
+
         </>
     );
-}
+})
